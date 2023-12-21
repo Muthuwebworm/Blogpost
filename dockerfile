@@ -1,5 +1,5 @@
 FROM node:18.17.0
-WORKDIR /app
+WORKDIR /src
 
 COPY package*.json ./
 RUN npm install
@@ -10,4 +10,4 @@ RUN npm run build
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
