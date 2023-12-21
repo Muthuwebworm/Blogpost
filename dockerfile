@@ -1,13 +1,10 @@
-FROM node:18.17.0
+FROM node:18.17.0 AS base
 WORKDIR /src
-
 COPY package*.json ./
 RUN npm install
-
 COPY . .
-
 RUN npm run build
 
-EXPOSE 3000
-
-CMD ["npm", "run", "start"]
+FROM nginx:alpine
+COPY --from=base /src/dist /usr/share/nginx/html
+EXPOSE 80
